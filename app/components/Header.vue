@@ -2,7 +2,7 @@
   <header class="header">
     <div class="header__content">
       <NuxtLink to="/" class="header__logo">
-        <img src="/logo.svg" alt="Моя планета" />
+        <img src="/logo.svg" alt="Моя планета" >
       </NuxtLink>
       <div id="header-action">
         <HeaderButton 

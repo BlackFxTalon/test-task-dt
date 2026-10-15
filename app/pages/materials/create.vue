@@ -10,17 +10,17 @@
             class="field__input field__input--title"
             placeholder="Введите заголовок"
             :maxlength="TITLE_MAX"
-          />
+          >
           <span class="field__counter">{{ counters.title }}/{{ TITLE_MAX }}</span>
           <span v-if="errors.title" class="field__error">{{ errors.title }}</span>
         </div>
         <div class="field">
           <textarea
+            id="textarea-description"
             v-model="form.short_description"
             class="field__input field__input--description"
             placeholder="Введите краткое описание..."
             rows="2"
-            id="textarea-description"
             :maxlength="DESCRIPTION_MAX"
           />
           <span class="field__counter">{{ counters.short_description }}/{{ DESCRIPTION_MAX }}</span>
@@ -31,7 +31,7 @@
         <div class="field">
           <label class="field__date">
             <Icon name="calendar" class="field__icon" />
-            <input v-model="form.datetime" type="datetime-local" class="field__input field__input--date" />
+            <input v-model="form.datetime" type="datetime-local" class="field__input field__input--date" >
           </label>
           <span v-if="errors.datetime" class="field__error">{{ errors.datetime }}</span>
         </div>
