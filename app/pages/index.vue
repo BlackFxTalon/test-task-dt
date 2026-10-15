@@ -23,7 +23,7 @@ await load().catch(() => {
 @import '../assets/styles/breakpoints.less';
 
 .page {
-  max-width: var(--container-list);
+  max-width: calc(var(--container-list) + 2 * var(--space-page));
   margin: 0 auto;
   padding: var(--space-page-top) var(--space-page);
 

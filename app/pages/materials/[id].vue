@@ -29,7 +29,7 @@ if (!material) {
 
 <style scoped lang="less">
 .page {
-  max-width: var(--container-content);
+  max-width: calc(var(--container-content) + 2 * var(--space-page));
   margin: 0 auto;
   padding: var(--space-page-top) var(--space-page);
 

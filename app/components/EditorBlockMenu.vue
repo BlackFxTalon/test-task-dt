@@ -99,7 +99,10 @@ const select = (block: Block) => {
   }
 
   .menu__icon--mobile {
+    --icon-size: 12px;
     display: block;
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 
   .menu__list {
