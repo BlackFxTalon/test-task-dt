@@ -1,4 +1,4 @@
-export interface Material {
+export interface IMaterial {
   id: number
   title: string
   short_description: string
@@ -7,4 +7,4 @@ export interface Material {
   description_json: Record<string, unknown>
 }
 
-export type MaterialDraft = Omit<Material, 'id'>
+export type MaterialDraft = Omit<IMaterial, 'id'>

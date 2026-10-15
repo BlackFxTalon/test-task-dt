@@ -1,5 +1,5 @@
 export const useMaterials = () => {
-  const materials = useState<Material[]>('materials', () => [])
+  const materials = useState<IMaterial[]>('materials', () => [])
   const loaded = useState('materials-loaded', () => false)
   const loading = useState('materials-loading', () => false)
 
@@ -11,7 +11,7 @@ export const useMaterials = () => {
     if (loaded.value || loading.value) return
     loading.value = true
     try {
-      materials.value = await $fetch<Material[]>('/api/materials')
+      materials.value = await $fetch<IMaterial[]>('/api/materials')
       loaded.value = true
     } finally {
       loading.value = false
@@ -19,7 +19,7 @@ export const useMaterials = () => {
   }
 
   const create = async (draft: MaterialDraft) => {
-    const material = await $fetch<Material>('/api/materials/save', {
+    const material = await $fetch<IMaterial>('/api/materials/save', {
       method: 'POST',
       body: draft
     })
