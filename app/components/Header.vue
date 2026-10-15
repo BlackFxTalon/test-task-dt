@@ -4,9 +4,9 @@
       <NuxtLink to="/" class="header__logo">
         <img src="/logo.svg" alt="Моя планета" />
       </NuxtLink>
-      <NuxtLink to="/materials/new" class="header__create" aria-label="Создать историю">
-        <span class="header__create-text">Создать историю</span>
-        <svg class="header__create-icon" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
+      <NuxtLink to="/materials/new" class="header__create">
+        <span class="header__create-text">Создать материал</span>
+        <svg class="header__create-icon" viewBox="0 0 28 28" width="28" height="28">
           <path d="M14 5v18M5 14h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
         </svg>
       </NuxtLink>
