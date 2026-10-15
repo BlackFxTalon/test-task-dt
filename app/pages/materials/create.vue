@@ -20,6 +20,7 @@
             class="field__input field__input--description"
             placeholder="Введите краткое описание..."
             rows="2"
+            id="textarea-description"
             :maxlength="DESCRIPTION_MAX"
           />
           <span class="field__counter">{{ counters.short_description }}/{{ DESCRIPTION_MAX }}</span>
