@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 
-const props = defineProps<{ content: Record<string, unknown> }>()
+const props = defineProps<{ content?: Record<string, unknown> }>()
 
 const editor = useEditor({
   content: props.content,
