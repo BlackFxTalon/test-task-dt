@@ -23,10 +23,10 @@ await load().catch(() => {
 .page {
   max-width: var(--container-list);
   margin: 0 auto;
-  padding: var(--space-title-top) var(--space-page);
+  padding: var(--space-page-top) var(--space-page);
 
   &__title {
-    margin-bottom: var(--space-title-bottom);
+    margin-bottom: var(--space-page-gap);
   }
 
   &__grid {
