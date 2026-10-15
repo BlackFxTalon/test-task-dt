@@ -1,7 +1,8 @@
 <template>
   <div class="menu">
     <button type="button" class="menu__button" @click="isOpen = !isOpen">
-      <Icon name="add" />
+      <Icon name="add" class="menu__icon menu__icon--desktop" />
+      <Icon name="plus" class="menu__icon menu__icon--mobile" />
     </button>
     <ul v-if="isOpen" class="menu__list">
       <li v-for="block in blocks" :key="block.label">
@@ -55,6 +56,13 @@ const select = (block: Block) => {
     cursor: pointer;
   }
 
+  &__icon--mobile {
+    display: none;
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
+    color: var(--color-text);
+  }
+
   &__list {
     position: absolute;
     top: 100%;
@@ -86,6 +94,14 @@ const select = (block: Block) => {
 }
 
 @media (max-width: @breakpoint-mobile) {
+  .menu__icon--desktop {
+    display: none;
+  }
+
+  .menu__icon--mobile {
+    display: block;
+  }
+
   .menu__list {
     position: fixed;
     top: auto;
