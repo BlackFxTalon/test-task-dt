@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="`/materials/${material.id}`" class="card">
     <div class="card__date">
-      <IconCalendar class="card__icon" />
+      <Icon name="calendar" class="card__icon" />
       <span>{{ formatDate(material.datetime) }}</span>
     </div>
     <div class="card__content">

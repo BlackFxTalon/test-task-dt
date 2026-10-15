@@ -4,7 +4,7 @@
     <article class="material">
       <header class="material__header">
         <div class="material__date">
-          <IconCalendar class="material__icon" />
+          <Icon name="calendar" class="material__icon" />
           <span>{{ formatDate(material.datetime) }}</span>
         </div>
         <h1>{{ material.title }}</h1>

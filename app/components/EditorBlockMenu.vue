@@ -1,9 +1,7 @@
 <template>
   <div class="menu">
     <button type="button" class="menu__button" @click="isOpen = !isOpen">
-      <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <path d="M10 4v12M4 10h12" />
-      </svg>
+      <Icon name="plus" class="menu__icon" />
     </button>
     <ul v-if="isOpen" class="menu__list">
       <li v-for="block in blocks" :key="block.label">
@@ -55,6 +53,11 @@ const select = (block: Block) => {
     background-color: var(--color-bg);
     color: var(--color-text);
     cursor: pointer;
+  }
+
+  &__icon {
+    width: var(--icon-size-lg);
+    height: var(--icon-size-lg);
   }
 
   &__list {
