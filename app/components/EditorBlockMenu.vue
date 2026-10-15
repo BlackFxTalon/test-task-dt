@@ -51,7 +51,7 @@ const select = (block: Block) => {
     border: 0;
     border-radius: var(--radius-editor-button);
     background-color: var(--color-bg);
-    color: var(--color-text);
+    color: var(--color-icon);
     cursor: pointer;
   }
 

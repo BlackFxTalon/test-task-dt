@@ -83,7 +83,7 @@ const blocks = computed(() => {
     height: 32px;
     border-radius: var(--radius-editor-button);
     background-color: var(--color-bg);
-    color: var(--color-text);
+    color: var(--color-icon);
     cursor: grab;
   }
 
