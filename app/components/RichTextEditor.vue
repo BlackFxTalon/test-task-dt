@@ -17,14 +17,16 @@
 </template>
 
 <script setup lang="ts">
+import { Placeholder } from '@tiptap/extensions'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 
+const props = defineProps<{ placeholder?: string }>()
 const html = defineModel<string>('html', { default: '' })
 const json = defineModel<Record<string, unknown>>('json')
 
 const editor = useEditor({
   content: html.value,
-  extensions: editorExtensions,
+  extensions: [...editorExtensions, Placeholder.configure({ placeholder: props.placeholder })],
   onUpdate: ({ editor }) => {
     html.value = editor.getHTML()
     json.value = editor.getJSON()
@@ -81,6 +83,14 @@ const actions = computed(() => {
   .ProseMirror {
     min-height: 200px;
     outline: none;
+
+    p.is-editor-empty:first-child::before {
+      content: attr(data-placeholder);
+      float: left;
+      height: 0;
+      color: var(--color-text-placeholder);
+      pointer-events: none;
+    }
   }
 }
 </style>

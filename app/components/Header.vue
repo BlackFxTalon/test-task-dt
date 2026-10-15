@@ -4,15 +4,23 @@
       <NuxtLink to="/" class="header__logo">
         <img src="/logo.svg" alt="Моя планета" />
       </NuxtLink>
-      <NuxtLink to="/materials/new" class="header__create">
-        <span class="header__create-text">Создать материал</span>
-        <svg class="header__create-icon" viewBox="0 0 28 28" width="28" height="28">
-          <path d="M14 5v18M5 14h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      </NuxtLink>
+      <div id="header-action">
+        <HeaderButton v-if="route.path !== '/materials/create'" to="/materials/create">
+          Создать материал
+          <template #icon>
+            <svg viewBox="0 0 28 28" width="28" height="28">
+              <path d="M14 5v18M5 14h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+          </template>
+        </HeaderButton>
+      </div>
     </div>
   </header>
 </template>
+
+<script setup lang="ts">
+const route = useRoute()
+</script>
 
 <style scoped lang="less">
 @import '../assets/styles/breakpoints.less';
@@ -37,48 +45,11 @@
   &__logo img {
     height: 44px;
   }
-
-  &__create {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 44px;
-    padding: 13px 24px;
-    border-radius: var(--radius-button);
-    background: var(--color-button);
-    color: var(--color-accent);
-    font-weight: var(--font-weight-medium);
-    font-size: var(--font-size-button);
-    transition: background-color 0.2s;
-
-    &:hover,
-    &:active {
-      background: var(--color-button-hover);
-    }
-  }
-
-  &__create-icon {
-    display: none;
-  }
 }
 
 @media (max-width: @breakpoint-mobile) {
   .header__logo img {
     height: 36px;
-  }
-
-  .header__create {
-    width: 48px;
-    height: 48px;
-    padding: 10px 14px;
-  }
-
-  .header__create-text {
-    display: none;
-  }
-
-  .header__create-icon {
-    display: block;
   }
 }
 </style>
