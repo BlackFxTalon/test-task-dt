@@ -2,11 +2,11 @@
   <div v-if="editor">
     <div class="editor">
       <DragHandle :editor="editor" class="editor__handle">
-        <EditorBlockActions :blocks="blocks" />
+        <EditorBlockMenu :blocks="blocks" />
       </DragHandle>
       <EditorContent :editor="editor" />
     </div>
-    <EditorBlockActions class="editor__add" :blocks="blocks" :editor="editor" />
+    <EditorBlockMenu class="editor__add" :blocks="blocks" />
   </div>
 </template>
 
