@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   css: ['~/assets/styles/main.less'],
   runtimeConfig: {
-    alias: ''
+    alias: '',
+    apiBase: 'https://naukatv.ru/api/test/materials'
   }
 })

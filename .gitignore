@@ -24,3 +24,6 @@ logs
 !.env.example
 CLAUDE.md
 PLAN.md
+
+test-results
+playwright-report
