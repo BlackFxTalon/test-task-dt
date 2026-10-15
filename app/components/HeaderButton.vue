@@ -8,7 +8,7 @@
   >
     <span v-if="loading" class="button__spinner" />
     <template v-else>
-      <span class="button__text"><slot /></span>
+      <span class="button__text"><slot name="text"/></span>
       <span class="button__icon"><slot name="icon" /></span>
     </template>
   </component>
@@ -17,7 +17,7 @@
 <script setup lang="ts">
 defineProps<{ to?: string; loading?: boolean }>()
 
-const NuxtLink = resolveComponent('NuxtLink')
+const NuxtLink = resolveComponent('NuxtLink');
 </script>
 
 <style scoped lang="less">

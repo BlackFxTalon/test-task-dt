@@ -6,7 +6,9 @@
       </NuxtLink>
       <div id="header-action">
         <HeaderButton v-if="route.path !== '/materials/create'" to="/materials/create">
-          Создать материал
+          <template #text>
+            {{ route.name === 'materials-id' ? 'Создать историю' : 'Создать материал' }}
+          </template>
           <template #icon>
             <svg viewBox="0 0 28 28" width="28" height="28">
               <path d="M14 5v18M5 14h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />

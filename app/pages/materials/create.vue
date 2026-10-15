@@ -47,7 +47,7 @@
     <ClientOnly>
       <Teleport to="#header-action">
         <HeaderButton form="material-form" :loading="saving">
-          Сохранить
+          <template #text>Сохранить</template>
           <template #icon>
             <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M24 4L12 16M24 4l-7 20-5-8-8-5 20-7z" />
