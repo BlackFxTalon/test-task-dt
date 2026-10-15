@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header__content">
-      <NuxtLink to="/" class="header__logo">Моя планета</NuxtLink>
+      <NuxtLink to="/" class="header__logo">
+        <img src="/logo.svg" alt="Моя планета" />
+      </NuxtLink>
       <NuxtLink to="/materials/new" class="header__create" aria-label="Создать историю">
         <span class="header__create-text">Создать историю</span>
         <svg class="header__create-icon" viewBox="0 0 28 28" width="28" height="28" aria-hidden="true">
@@ -32,11 +34,8 @@
     padding: 0 var(--header-padding);
   }
 
-  &__logo {
-    font-family: var(--font-family-heading);
-    font-weight: var(--font-weight-heading);
-    font-size: var(--font-size-h2);
-    color: var(--color-accent);
+  &__logo img {
+    height: 44px;
   }
 
   &__create {
@@ -64,6 +63,10 @@
 }
 
 @media (max-width: @breakpoint-mobile) {
+  .header__logo img {
+    height: 36px;
+  }
+
   .header__create {
     width: 48px;
     height: 48px;
