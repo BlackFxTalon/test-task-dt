@@ -2,23 +2,11 @@
   <div v-if="editor">
     <div class="editor">
       <DragHandle :editor="editor" class="editor__handle">
-        <div class="editor__actions">
-          <EditorBlockMenu :blocks="blocks" />
-          <span class="editor__drag">
-            <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-              <circle cx="9" cy="6" r="1.2" />
-              <circle cx="15" cy="6" r="1.2" />
-              <circle cx="9" cy="12" r="1.2" />
-              <circle cx="15" cy="12" r="1.2" />
-              <circle cx="9" cy="18" r="1.2" />
-              <circle cx="15" cy="18" r="1.2" />
-            </svg>
-          </span>
-        </div>
+        <EditorBlockActions :blocks="blocks" />
       </DragHandle>
       <EditorContent :editor="editor" />
     </div>
-    <EditorBlockMenu class="editor__add" :blocks="blocks" />
+    <EditorBlockActions class="editor__add" :blocks="blocks" />
   </div>
 </template>
 
@@ -77,28 +65,11 @@ const blocks = computed(() => {
     padding-right: 24px;
   }
 
-  &__actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  &__drag {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: var(--radius-editor-button);
-    background: var(--color-bg);
-    color: var(--color-text);
-  }
-
   &__add {
     display: none;
   }
 
   .ProseMirror {
-    min-height: 200px;
     outline: none;
 
     p.is-editor-empty:first-child::before {
