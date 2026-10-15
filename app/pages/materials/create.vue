@@ -29,7 +29,10 @@
           </span>
         </div>
         <div class="field">
-          <input v-model="form.datetime" type="datetime-local" class="field__input field__input--date" />
+          <label class="field__date">
+            <IconCalendar class="field__icon" />
+            <input v-model="form.datetime" type="datetime-local" class="field__input field__input--date" />
+          </label>
           <span v-if="errors.datetime" class="field__error">{{ errors.datetime }}</span>
         </div>
       </div>
@@ -39,7 +42,7 @@
           v-model:json="form.description_json"
           placeholder="Введите текст..."
         />
-        <span v-if="errors.description_html" class="field__error">{{ errors.description_html }}</span>
+        <span v-if="errors.description_html" class="field__error field__error--description-html">{{ errors.description_html }}</span>
       </div>
       <p v-if="submitError" class="field__error">{{ submitError }}</p>
     </form>
@@ -49,8 +52,9 @@
         <HeaderButton form="material-form" :loading="saving">
           <template #text>Сохранить</template>
           <template #icon>
-            <svg viewBox="0 0 28 28" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M24 4L12 16M24 4l-7 20-5-8-8-5 20-7z" />
+            <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.8133 22.4862C12.4367 22.4862 10.4883 21.5178 8.94833 16.8862L8.10833 14.3662L5.58833 13.5262C0.968333 11.9862 0 10.0378 0 8.66118C0 7.29618 0.968333 5.33618 5.58833 3.78451L15.4933 0.482848C17.9667 -0.345485 20.0317 -0.100485 21.3033 1.15951C22.575 2.41951 22.82 4.49618 21.9917 6.96951L18.69 16.8745C17.1383 21.5178 15.19 22.4862 13.8133 22.4862ZM6.13667 5.45285C2.89333 6.53785 1.73833 7.82118 1.73833 8.66118C1.73833 9.50118 2.89333 10.7845 6.13667 11.8578L9.07667 12.8378C9.33333 12.9195 9.54333 13.1295 9.625 13.3862L10.605 16.3262C11.6783 19.5695 12.9733 20.7245 13.8133 20.7245C14.6533 20.7245 15.9367 19.5695 17.0217 16.3262L20.3233 6.42118C20.9183 4.62451 20.8133 3.15451 20.055 2.39618C19.2967 1.63785 17.8267 1.54452 16.0417 2.13951L6.13667 5.45285Z" fill="#00B2FF"/>
+            <path d="M9.01833 14.0512C8.79667 14.0512 8.575 13.9695 8.4 13.7945C8.06167 13.4562 8.06167 12.8962 8.4 12.5578L12.5767 8.36951C12.915 8.03118 13.475 8.03118 13.8133 8.36951C14.1517 8.70785 14.1517 9.26785 13.8133 9.60618L9.63667 13.7945C9.47333 13.9695 9.24 14.0512 9.01833 14.0512Z" fill="#00B2FF"/>
             </svg>
           </template>
         </HeaderButton>
@@ -88,7 +92,6 @@ const submit = async () => {
 </script>
 
 <style scoped lang="less">
-@import '../../assets/styles/breakpoints.less';
 
 .page {
   max-width: var(--container-content);
@@ -111,7 +114,7 @@ const submit = async () => {
   min-height: var(--editor-min-height);
   padding: var(--editor-padding-y) var(--editor-padding-x);
   border-radius: var(--radius-editor);
-  background: var(--color-white);
+  background-color: var(--color-white);
 
   &__header {
     display: flex;
@@ -131,7 +134,7 @@ const submit = async () => {
     padding: 0;
     border: 0;
     outline: none;
-    background: transparent;
+    background-color: transparent;
     resize: none;
     color: var(--color-text);
 
@@ -154,10 +157,31 @@ const submit = async () => {
 
     &--date {
       width: auto;
-      align-self: flex-start;
       color: var(--color-text-muted);
       font-size: var(--font-size-card-text);
+
+      &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+      }
     }
+  }
+
+  &__date {
+    position: relative;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: var(--space-icon);
+  }
+
+  &__icon {
+    width: var(--icon-size);
+    height: var(--icon-size);
   }
 
   &__counter {
@@ -170,11 +194,9 @@ const submit = async () => {
     color: var(--color-error);
     font-size: var(--font-size-card-text);
   }
-}
 
-@media (max-width: @breakpoint-mobile) {
-  .page__back {
-    display: none;
+  &__error--description-html {
+      padding-left: var(--editor-header-indent);
   }
 }
 </style>
