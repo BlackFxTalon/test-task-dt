@@ -1,42 +1,45 @@
 <template>
   <div v-if="editor" class="editor">
-    <div class="editor__actions">
-      <div class="editor__menu">
-        <button type="button" class="editor__action" @click="isMenuOpen = !isMenuOpen">
-          <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-            <path d="M10 4v12M4 10h12" />
+    <DragHandle :editor="editor" class="editor__handle">
+      <div class="editor__actions">
+        <div class="editor__menu">
+          <button type="button" class="editor__action" @click="isMenuOpen = !isMenuOpen">
+            <svg viewBox="0 0 20 20" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+              <path d="M10 4v12M4 10h12" />
+            </svg>
+          </button>
+          <ul v-if="isMenuOpen" class="editor__list">
+            <li v-for="block in blocks" :key="block.label">
+              <button
+                type="button"
+                class="editor__item"
+                :class="{ 'editor__item--active': block.isActive() }"
+                @click="select(block)"
+              >
+                {{ block.label }}
+              </button>
+            </li>
+          </ul>
+        </div>
+        <span class="editor__action">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <circle cx="9" cy="6" r="1.2" />
+            <circle cx="15" cy="6" r="1.2" />
+            <circle cx="9" cy="12" r="1.2" />
+            <circle cx="15" cy="12" r="1.2" />
+            <circle cx="9" cy="18" r="1.2" />
+            <circle cx="15" cy="18" r="1.2" />
           </svg>
-        </button>
-        <ul v-if="isMenuOpen" class="editor__list">
-          <li v-for="block in blocks" :key="block.label">
-            <button
-              type="button"
-              class="editor__item"
-              :class="{ 'editor__item--active': block.isActive() }"
-              @click="select(block)"
-            >
-              {{ block.label }}
-            </button>
-          </li>
-        </ul>
+        </span>
       </div>
-      <span class="editor__action">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-          <circle cx="9" cy="6" r="1.2" />
-          <circle cx="15" cy="6" r="1.2" />
-          <circle cx="9" cy="12" r="1.2" />
-          <circle cx="15" cy="12" r="1.2" />
-          <circle cx="9" cy="18" r="1.2" />
-          <circle cx="15" cy="18" r="1.2" />
-        </svg>
-      </span>
-    </div>
-    <EditorContent :editor="editor" class="editor__content" />
+    </DragHandle>
+    <EditorContent :editor="editor" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { Placeholder } from '@tiptap/extensions'
+import { DragHandle } from '@tiptap/extension-drag-handle-vue-3'
 import { EditorContent, useEditor } from '@tiptap/vue-3'
 
 const props = defineProps<{ placeholder?: string }>()
@@ -89,15 +92,16 @@ const select = (block: { run: () => unknown }) => {
 @import '../assets/styles/breakpoints.less';
 
 .editor {
-  display: flex;
-  align-items: flex-start;
-  gap: 24px;
+  position: relative;
+  padding-left: var(--editor-header-indent);
+
+  &__handle {
+    padding-right: 24px;
+  }
 
   &__actions {
     display: flex;
-    flex-shrink: 0;
     gap: 10px;
-    margin-top: -2px;
   }
 
   &__menu {
@@ -150,11 +154,6 @@ const select = (block: { run: () => unknown }) => {
     }
   }
 
-  &__content {
-    flex: 1;
-    min-width: 0;
-  }
-
   .ProseMirror {
     min-height: 200px;
     outline: none;
@@ -171,12 +170,8 @@ const select = (block: { run: () => unknown }) => {
 }
 
 @media (max-width: @breakpoint-mobile) {
-  .editor {
-    gap: 0;
-
-    &__actions {
-      display: none;
-    }
+  .editor__handle {
+    display: none;
   }
 }
 </style>
