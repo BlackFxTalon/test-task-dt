@@ -2,7 +2,12 @@
   <div v-if="editor">
     <div class="editor">
       <DragHandle :editor="editor" class="editor__handle">
-        <EditorBlockMenu :blocks="blocks" />
+        <div class="editor__actions">
+          <EditorBlockMenu :blocks="blocks" />
+          <span class="editor__drag">
+            <Icon name="drag" />
+          </span>
+        </div>
       </DragHandle>
       <EditorContent :editor="editor" />
     </div>
@@ -63,6 +68,23 @@ const blocks = computed(() => {
 
   &__handle {
     padding-right: 24px;
+  }
+
+  &__actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__drag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: var(--radius-editor-button);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    cursor: grab;
   }
 
   &__add {

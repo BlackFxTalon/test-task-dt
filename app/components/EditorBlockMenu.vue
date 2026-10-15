@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <button type="button" class="menu__button" @click="isOpen = !isOpen">
-      <Icon name="plus" class="menu__icon" />
+      <Icon name="add" />
     </button>
     <ul v-if="isOpen" class="menu__list">
       <li v-for="block in blocks" :key="block.label">
@@ -53,11 +53,6 @@ const select = (block: Block) => {
     background-color: var(--color-bg);
     color: var(--color-text);
     cursor: pointer;
-  }
-
-  &__icon {
-    width: var(--icon-size-lg);
-    height: var(--icon-size-lg);
   }
 
   &__list {
