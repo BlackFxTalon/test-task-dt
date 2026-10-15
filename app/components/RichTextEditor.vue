@@ -6,7 +6,7 @@
       </DragHandle>
       <EditorContent :editor="editor" />
     </div>
-    <EditorBlockActions class="editor__add" :blocks="blocks" />
+    <EditorBlockActions class="editor__add" :blocks="blocks" :editor="editor" />
   </div>
 </template>
 
