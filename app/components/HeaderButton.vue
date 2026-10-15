@@ -31,7 +31,7 @@ const NuxtLink = resolveComponent('NuxtLink');
   padding: 13px 24px;
   border: 0;
   border-radius: var(--radius-button);
-  background: var(--color-button);
+  background-color: var(--color-button);
   color: var(--color-accent);
   font-weight: var(--font-weight-medium);
   font-size: var(--font-size-button);
@@ -40,7 +40,7 @@ const NuxtLink = resolveComponent('NuxtLink');
 
   &:hover:not(:disabled),
   &:active:not(:disabled) {
-    background: var(--color-button-hover);
+    background-color: var(--color-button-hover);
   }
 
   &:disabled {
@@ -79,8 +79,7 @@ const NuxtLink = resolveComponent('NuxtLink');
     }
 
     &__icon {
-      display: block;
-      height: 28px;
+      display: flex;
     }
   }
 }

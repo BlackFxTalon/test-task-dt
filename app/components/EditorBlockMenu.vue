@@ -52,7 +52,7 @@ const select = (block: Block) => {
     padding: 0;
     border: 0;
     border-radius: var(--radius-editor-button);
-    background: var(--color-bg);
+    background-color: var(--color-bg);
     color: var(--color-text);
     cursor: pointer;
   }
@@ -67,7 +67,7 @@ const select = (block: Block) => {
     padding: 4px;
     list-style: none;
     border-radius: var(--radius-editor-button);
-    background: var(--color-white);
+    background-color: var(--color-white);
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
   }
 
@@ -76,13 +76,13 @@ const select = (block: Block) => {
     padding: 6px 12px;
     border: 0;
     border-radius: var(--radius-editor-button);
-    background: transparent;
+    background-color: transparent;
     text-align: left;
     cursor: pointer;
 
     &:hover,
     &--active {
-      background: var(--color-bg);
+      background-color: var(--color-bg);
     }
   }
 }

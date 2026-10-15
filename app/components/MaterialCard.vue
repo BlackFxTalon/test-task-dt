@@ -25,7 +25,7 @@ defineProps<{ material: IMaterial }>()
   width: var(--card-width);
   padding: var(--card-padding-y) var(--card-padding-x);
   border-radius: var(--radius-card);
-  background: var(--color-white);
+  background-color: var(--color-white);
   transition: filter 0.2s;
 
   &__date {

@@ -44,7 +44,7 @@ if (!material) {
   gap: var(--space-detail-block);
   padding: var(--detail-padding-y) var(--detail-padding-x);
   border-radius: var(--radius-detail);
-  background: var(--color-white);
+  background-color: var(--color-white);
 
   &__header {
     display: flex;

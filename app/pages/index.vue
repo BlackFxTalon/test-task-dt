@@ -20,6 +20,8 @@ await load().catch(() => {
 </script>
 
 <style scoped lang="less">
+@import '../assets/styles/breakpoints.less';
+
 .page {
   max-width: var(--container-list);
   margin: 0 auto;
@@ -33,6 +35,12 @@ await load().catch(() => {
     display: grid;
     grid-template-columns: repeat(auto-fill, var(--card-width));
     gap: var(--space-grid);
+  }
+}
+
+@media (max-width: @breakpoint-mobile) {
+  .page__grid {
+      justify-content: center;
   }
 }
 </style>
