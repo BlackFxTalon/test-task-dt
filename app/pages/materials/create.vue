@@ -37,10 +37,11 @@
         </div>
       </div>
       <div class="field">
-        <RichTextEditor
+        <LazyRichTextEditor
           v-model:html="form.description_html"
           v-model:json="form.description_json"
           placeholder="Введите текст..."
+          hydrate-on-idle
         />
         <span v-if="errors.description_html" class="field__error field__error--description-html">{{ errors.description_html }}</span>
       </div>
