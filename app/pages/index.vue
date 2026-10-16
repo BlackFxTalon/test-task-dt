@@ -14,9 +14,11 @@
 const { materials, loading, load } = useMaterials()
 const error = ref(false)
 
-await load().catch(() => {
+try {
+  await load()
+} catch {
   error.value = true
-})
+}
 </script>
 
 <style scoped lang="less">
