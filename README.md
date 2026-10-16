@@ -1,75 +1,93 @@
-# Nuxt Minimal Starter
+# Материалы
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Тестовое задание: список материалов, детальная страница и форма создания материала с WYSIWYG-редактором. Nuxt 4, Vue 3, Less, TipTap.
 
-## Setup
+## Установка и запуск
 
-Make sure to install dependencies:
+Нужен Node.js 20+.
 
 ```bash
-# npm
 npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+cp .env.example .env
 ```
 
-## Development Server
+В `.env` укажите персональный код для API:
 
-Start the development server on `http://localhost:3000`:
+```
+NUXT_ALIAS=ваш_код
+```
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+npm run dev       # разработка, http://localhost:3000
+npm run build     # production-сборка
+npm run preview   # просмотр сборки
 ```
 
-## Production
-
-Build the application for production:
+### Проверки
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+npm run lint      # ESLint (@nuxt/eslint)
+npm test          # юнит-тесты (Vitest, @nuxt/test-utils)
+npx playwright install chromium   # один раз
+npm run test:e2e  # e2e-тесты (Playwright)
 ```
 
-Locally preview production build:
+E2E не обращаются к реальному API: тесты поднимают заглушку (`tests/e2e/stub-api.mjs`) и собранное приложение, адрес API передаётся через `NUXT_API_BASE`.
 
-```bash
-# npm
-npm run preview
+## Структура
 
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```
+app/
+  pages/            страницы: список, детальная, создание
+  components/       Header, MaterialCard, RichTextEditor, RichTextViewer и др.
+  composables/      useMaterials (данные), useMaterialForm (форма и валидация)
+  utils/            formatDate, editorExtensions
+  constants/        лимиты полей, иконки
+  assets/styles/    main.less: CSS-переменные, reset, типографика
+server/api/         прокси к API (Nitro)
+tests/              unit и e2e
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Стили на Less. Цвета, шрифты, отступы, радиусы и размеры контейнеров лежат в CSS-переменных в `app/assets/styles/main.less`, мобильные значения переопределяются там же в `@media (max-width: 767px)`. Компоненты используют эти переменные.
+
+## Как получаются данные для детальной страницы
+
+Отдельного эндпоинта нет, поэтому выбран третий вариант: **общее состояние (стор)**. Список материалов хранится в composable `useMaterials` на `useState` (встроенное состояние Nuxt, общее для всего приложения и передаваемое с сервера на клиент). Страница списка вызывает `load()`, детальная страница вызывает его же и берёт материал через `findById(id)` из тех же данных. Если списка в состоянии ещё нет (например, прямой заход по ссылке), `load()` загрузит его один раз. Для несуществующего `id` отдаётся 404.
+
+Почему так:
+
+- Не нужен лишний запрос при переходе из списка на детальную: данные уже есть.
+- Работает при прямом заходе и обновлении страницы, в отличие от передачи через пропсы: пропсы между страницами не пробросить, а при перезагрузке они потерялись бы.
+- Сравнение с `route` при каждом открытии без общего состояния заставило бы каждый раз заново грузить весь список.
+- Созданный материал кладётся в то же состояние (`create()`), поэтому после сохранения детальная страница открывается сразу с данными, которые вернул сервер, и новый материал виден в списке без перезагрузки.
+
+Pinia не подключал: для одного списка с четырьмя методами `useState` и composable решают задачу без дополнительной зависимости и конфигурации (принцип YAGNI). Если состояние разрастётся (фильтры, пагинация, несколько сущностей), `useMaterials` можно перенести в Pinia-стор без изменения компонентов: они работают только с интерфейсом `useMaterials`.
+
+## Проверка длины title и short_description
+
+Лимиты вынесены в константы `TITLE_MAX = 80` и `DESCRIPTION_MAX = 255` (`app/constants/material.ts`) и используются в двух местах:
+
+1. **Поля ввода**: атрибут `maxlength` не даёт ввести больше символов, рядом показывается счётчик `N/80` и `N/255`.
+2. **Валидация** в `useMaterialForm`: перед отправкой проверяются пустые значения и превышение лимитов (после обрезки пробелов по краям), ошибки показываются под полями. Проверка нужна дополнительно к `maxlength`, потому что значение можно вставить или изменить в обход атрибута. Форма не отправляется, пока есть ошибки. Также проверяются дата и непустой текст редактора.
+
+Дата в форме по умолчанию текущая (локальное время для `datetime-local`), при отправке переводится в ISO через `toISOString()`. В запросе уходят `title`, `short_description`, `datetime`, `description_html` и `description_json` из редактора.
+
+## CORS
+
+Сервер API не отдаёт CORS-заголовки для запросов с localhost, поэтому браузер не может обращаться к нему напрямую. Запросы идут через **серверные роуты Nitro**, встроенные в Nuxt:
+
+- `GET /api/materials` → `https://naukatv.ru/api/test/materials/{alias}`
+- `POST /api/materials/save` → `https://naukatv.ru/api/test/materials/{alias}/save`
+
+Браузер ходит на тот же origin, а запрос к внешнему API делает уже сервер (`proxyRequest` из h3), поэтому CORS не применяется. Статус и тело ответа передаются как есть.
+
+Почему именно так, а не другие обходы:
+
+- Прокси в Vite (`vite.server.proxy`) работает только в dev-режиме, в production-сборке обхода бы не было. Серверные роуты работают одинаково в dev и в production.
+- Расширения браузера и публичные CORS-прокси небезопасны и недоступны в окружении проверяющего.
+- Персональный код (`alias`) остаётся на сервере: он хранится в приватном `runtimeConfig` (переменная `NUXT_ALIAS`) и не попадает в клиентский бандл.
+- Адрес API вынесен в `runtimeConfig.apiBase` (`NUXT_API_BASE`), что позволяет подменять его в тестах.
+
+## Редактор
+
+Используется TipTap (`@tiptap/vue-3`, `@tiptap/starter-kit`): параграф, заголовки h1-h3, цитата. На сервер отправляются и HTML (`getHTML()`), и JSON (`getJSON()`). Набор расширений общий для редактора и просмотра (`app/utils/editorExtensions.ts`), поэтому материал на детальной странице отображается тем же TipTap в режиме чтения, без `v-html`. Блоки можно перетаскивать за ручку слева, плюс открывает меню типа блока.
