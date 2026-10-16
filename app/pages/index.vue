@@ -11,13 +11,13 @@
 </template>
 
 <script setup lang="ts">
-const { materials, loading, load } = useMaterials()
-const error = ref(false)
+const { materials, loading, load } = useMaterials();
+const error = ref(false);
 
 try {
-  await load()
+  await load();
 } catch {
-  error.value = true
+  error.value = true;
 }
 </script>
 

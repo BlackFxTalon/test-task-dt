@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ material: IMaterial }>()
+defineProps<{ material: IMaterial }>();
 </script>
 
 <style scoped lang="less">

@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
 </script>
 
 <style scoped lang="less">

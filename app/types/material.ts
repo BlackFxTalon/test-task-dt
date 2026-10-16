@@ -7,4 +7,4 @@ export interface IMaterial {
   description_json: Record<string, unknown>
 }
 
-export type MaterialDraft = Omit<IMaterial, 'id'>
+export type MaterialDraft = Omit<IMaterial, 'id'>;

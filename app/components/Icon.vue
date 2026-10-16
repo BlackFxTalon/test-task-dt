@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts">
-import { icons, type IconName } from '~/constants/icons'
+import { icons, type IconName } from '~/constants/icons';
 
-const props = defineProps<{ name: IconName }>()
+const props = defineProps<{ name: IconName }>();
 
-const icon = computed(() => icons[props.name])
+const icon = computed(() => icons[props.name]);
 </script>

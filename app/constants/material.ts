@@ -1,2 +1,2 @@
-export const TITLE_MAX = 80
-export const DESCRIPTION_MAX = 255
+export const TITLE_MAX = 80;
+export const DESCRIPTION_MAX = 255;

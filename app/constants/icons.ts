@@ -52,6 +52,6 @@ export const icons = {
       'M14.25 18.375a1.125 1.125 0 1 0 2.25 0a1.125 1.125 0 1 0 -2.25 0'
     ]
   }
-} as const
+} as const;
 
-export type IconName = keyof typeof icons
+export type IconName = keyof typeof icons;

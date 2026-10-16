@@ -26,14 +26,14 @@ interface Block {
   run: () => unknown
 }
 
-defineProps<{ blocks: Block[] }>()
+defineProps<{ blocks: Block[] }>();
 
-const isOpen = ref(false)
+const isOpen = ref(false);
 
 const select = (block: Block) => {
-  block.run()
-  isOpen.value = false
-}
+  block.run();
+  isOpen.value = false;
+};
 </script>
 
 <style scoped lang="less">

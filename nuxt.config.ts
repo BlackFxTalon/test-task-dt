@@ -7,4 +7,4 @@ export default defineNuxtConfig({
     alias: '',
     apiBase: 'https://naukatv.ru/api/test/materials'
   }
-})
+});

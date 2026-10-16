@@ -16,32 +16,32 @@
 </template>
 
 <script setup lang="ts">
-import { Placeholder } from '@tiptap/extensions'
-import { DragHandle } from '@tiptap/extension-drag-handle-vue-3'
-import { EditorContent, useEditor } from '@tiptap/vue-3'
+import { Placeholder } from '@tiptap/extensions';
+import { DragHandle } from '@tiptap/extension-drag-handle-vue-3';
+import { EditorContent, useEditor } from '@tiptap/vue-3';
 
-const props = defineProps<{ placeholder?: string }>()
-const html = defineModel<string>('html', { default: '' })
-const json = defineModel<Record<string, unknown>>('json')
+const props = defineProps<{ placeholder?: string }>();
+const html = defineModel<string>('html', { default: '' });
+const json = defineModel<Record<string, unknown>>('json');
 
 const editor = useEditor({
   content: html.value,
   extensions: [...editorExtensions, Placeholder.configure({ placeholder: props.placeholder })],
   onUpdate: ({ editor }) => {
-    html.value = editor.getHTML()
-    json.value = editor.getJSON()
+    html.value = editor.getHTML();
+    json.value = editor.getJSON();
   }
-})
+});
 
 const blocks = computed(() => {
-  const current = editor.value
-  if (!current) return []
+  const current = editor.value;
+  if (!current) return [];
 
   const headings = ([1, 2, 3] as const).map((level) => ({
     label: `Заголовок ${level}`,
     isActive: () => current.isActive('heading', { level }),
     run: () => current.chain().focus().toggleHeading({ level }).run()
-  }))
+  }));
 
   return [
     {
@@ -55,8 +55,8 @@ const blocks = computed(() => {
       isActive: () => current.isActive('blockquote'),
       run: () => current.chain().focus().toggleBlockquote().run()
     }
-  ]
-})
+  ];
+});
 </script>
 
 <style lang="less">

@@ -1,4 +1,4 @@
-import StarterKit from '@tiptap/starter-kit'
+import StarterKit from '@tiptap/starter-kit';
 
 export const editorExtensions = [
   StarterKit.configure({
@@ -16,4 +16,4 @@ export const editorExtensions = [
     horizontalRule: false,
     link: false
   })
-]
+];

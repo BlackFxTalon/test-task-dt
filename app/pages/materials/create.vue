@@ -61,31 +61,31 @@
 </template>
 
 <script setup lang="ts">
-import { DESCRIPTION_MAX, TITLE_MAX } from '~/constants/material'
+import { DESCRIPTION_MAX, TITLE_MAX } from '~/constants/material';
 
-const { form, errors, counters, validate, toDraft } = useMaterialForm()
-const { create } = useMaterials()
+const { form, errors, counters, validate, toDraft } = useMaterialForm();
+const { create } = useMaterials();
 
-const saving = ref(false)
-const submitError = ref('')
+const saving = ref(false);
+const submitError = ref('');
 
 const submit = async () => {
-  if (!validate()) return
+  if (!validate()) return;
 
-  saving.value = true
-  submitError.value = ''
-  let material: IMaterial
+  saving.value = true;
+  submitError.value = '';
+  let material: IMaterial;
   try {
-    material = await create(toDraft())
+    material = await create(toDraft());
   } catch {
-    submitError.value = 'Не удалось сохранить материал. Попробуйте ещё раз'
-    return
+    submitError.value = 'Не удалось сохранить материал. Попробуйте ещё раз';
+    return;
   } finally {
-    saving.value = false
+    saving.value = false;
   }
 
-  await navigateTo(`/materials/${material.id}`)
-}
+  await navigateTo(`/materials/${material.id}`);
+};
 </script>
 
 <style scoped lang="less">

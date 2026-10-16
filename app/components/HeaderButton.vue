@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ to?: string; loading?: boolean }>()
+defineProps<{ to?: string; loading?: boolean }>();
 
 const NuxtLink = resolveComponent('NuxtLink');
 </script>

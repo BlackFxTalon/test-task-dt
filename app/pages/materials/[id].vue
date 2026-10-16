@@ -16,14 +16,14 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const { load, findById } = useMaterials()
+const route = useRoute();
+const { load, findById } = useMaterials();
 
-await load()
-const material = findById(String(route.params.id))
+await load();
+const material = findById(String(route.params.id));
 
 if (!material) {
-  throw createError({ statusCode: 404 })
+  throw createError({ statusCode: 404 });
 }
 </script>
 
