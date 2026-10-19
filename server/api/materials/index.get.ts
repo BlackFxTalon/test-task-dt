@@ -1,4 +1,3 @@
 export default defineEventHandler((event) => {
-  const { alias, apiBase } = useRuntimeConfig(event);
-  return proxyRequest(event, `${apiBase}/${alias}`);
+  return sendProxy(event, materialsUrl(event));
 });
