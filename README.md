@@ -27,12 +27,13 @@ npm run preview   # просмотр сборки
 
 ```bash
 npm run lint      # ESLint (@nuxt/eslint)
+npm run typecheck # проверка типов (vue-tsc)
 npm test          # юнит-тесты (Vitest, @nuxt/test-utils)
 npx playwright install chromium   # один раз
 npm run test:e2e  # e2e-тесты (Playwright)
 ```
 
-E2E не обращаются к реальному API: тесты поднимают заглушку (`tests/e2e/stub-api.mjs`) и собранное приложение, адрес API передаётся через `NUXT_API_BASE`.
+E2E не обращаются к реальному API: тесты поднимают заглушку (`tests/e2e/stub-api.mjs`) и собранное приложение, адрес API передаётся через необязательную переменную `NUXT_API_BASE` (по умолчанию `https://naukatv.ru/api/test/materials`, в обычной работе задавать её не нужно).
 
 ## Структура
 
@@ -79,7 +80,7 @@ Pinia не подключал: для одного списка с четырь�
 - `GET /api/materials` → `https://naukatv.ru/api/test/materials/{alias}`
 - `POST /api/materials/save` → `https://naukatv.ru/api/test/materials/{alias}/save`
 
-Браузер ходит на тот же origin, а запрос к внешнему API делает уже сервер (`proxyRequest` из h3), поэтому CORS не применяется. Статус и тело ответа передаются как есть.
+Браузер ходит на тот же origin, а запрос к внешнему API делает уже сервер (`sendProxy` из h3), поэтому CORS не применяется. Статус и тело ответа передаются как есть, а заголовки клиента (cookie и т. п.) наружу не пересылаются: для POST уходит только тело и `content-type`.
 
 Почему именно так, а не другие обходы:
 
