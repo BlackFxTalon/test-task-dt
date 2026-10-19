@@ -6,6 +6,8 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   app: {
     head: {
+      htmlAttrs: { lang: 'ru' },
+      titleTemplate: '%s | Моя планета',
       link: fonts.map((font) => ({
         rel: 'preload',
         as: 'font',

@@ -30,5 +30,5 @@ export const useMaterials = () => {
 
   const findById = (id: string) => materials.value.find((item) => String(item.id) === id);
 
-  return { materials: sorted, loading, load, create, findById };
+  return { materials: sorted, load, create, findById };
 };

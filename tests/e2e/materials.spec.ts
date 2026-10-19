@@ -7,6 +7,8 @@ test('shows empty state when there are no materials', async ({ page }) => {
 
   await expect(page.getByRole('heading', { name: 'Материалы' })).toBeVisible();
   await expect(page.getByText('Материалов пока нет')).toBeVisible();
+  await expect(page).toHaveTitle('Материалы | Моя планета');
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ru');
 });
 
 test('shows validation errors for empty form', async ({ page }) => {

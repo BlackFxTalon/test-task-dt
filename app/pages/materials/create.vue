@@ -64,6 +64,8 @@
 <script setup lang="ts">
 import { DESCRIPTION_MAX, TITLE_MAX } from '~/constants/material';
 
+useHead({ title: 'Создание материала' });
+
 const { form, errors, counters, validate, toDraft } = useMaterialForm();
 const { create } = useMaterials();
 

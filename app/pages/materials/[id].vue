@@ -25,6 +25,8 @@ const material = findById(String(route.params.id));
 if (!material) {
   throw createError({ statusCode: 404 });
 }
+
+useHead({ title: material.title });
 </script>
 
 <style scoped lang="less">
