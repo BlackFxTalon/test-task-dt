@@ -9,7 +9,7 @@ export const useMaterialForm = () => {
   const form = reactive({
     title: '',
     short_description: '',
-  datetime: toLocalInputValue(new Date()),
+    datetime: toLocalInputValue(new Date()),
     description_html: '',
     description_json: {} as Record<string, unknown>
   });
