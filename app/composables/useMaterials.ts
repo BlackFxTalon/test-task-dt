@@ -1,21 +1,15 @@
 export const useMaterials = () => {
   const materials = useState<IMaterial[]>('materials', () => []);
   const loaded = useState('materials-loaded', () => false);
-  const loading = useState('materials-loading', () => false);
 
   const sorted = computed(() =>
     [...materials.value].sort((a, b) => Date.parse(b.datetime) - Date.parse(a.datetime))
   );
 
   const load = async () => {
-    if (loaded.value || loading.value) return;
-    loading.value = true;
-    try {
-      materials.value = await $fetch<IMaterial[]>('/api/materials');
-      loaded.value = true;
-    } finally {
-      loading.value = false;
-    }
+    if (loaded.value) return;
+    materials.value = await $fetch<IMaterial[]>('/api/materials');
+    loaded.value = true;
   };
 
   const create = async (draft: MaterialDraft) => {

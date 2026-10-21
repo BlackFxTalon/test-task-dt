@@ -23,7 +23,7 @@ registerEndpoint('/api/materials/save', {
 
 describe('useMaterials', () => {
   beforeEach(() => {
-    clearNuxtState(['materials', 'materials-loaded', 'materials-loading']);
+    clearNuxtState(['materials', 'materials-loaded']);
   });
 
   it('loads materials sorted from newest to oldest', async () => {
