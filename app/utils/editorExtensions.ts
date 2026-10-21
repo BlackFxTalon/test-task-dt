@@ -1,8 +1,10 @@
 import StarterKit from '@tiptap/starter-kit';
 
+export const HEADING_LEVELS = [1, 2, 3] as const;
+
 export const editorExtensions = [
   StarterKit.configure({
-    heading: { levels: [1, 2, 3] },
+    heading: { levels: [...HEADING_LEVELS] },
     bold: false,
     italic: false,
     strike: false,

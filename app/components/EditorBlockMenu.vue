@@ -20,17 +20,12 @@
 </template>
 
 <script setup lang="ts">
-interface Block {
-  label: string
-  isActive: () => boolean
-  run: () => unknown
-}
 
-defineProps<{ blocks: Block[] }>();
+defineProps<{ blocks: IBlock[] }>();
 
 const isOpen = ref(false);
 
-const select = (block: Block) => {
+const select = (block: IBlock) => {
   block.run();
   isOpen.value = false;
 };

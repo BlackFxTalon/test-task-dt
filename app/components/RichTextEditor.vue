@@ -37,7 +37,7 @@ const blocks = computed(() => {
   const current = editor.value;
   if (!current) return [];
 
-  const headings = ([1, 2, 3] as const).map((level) => ({
+  const headings = [...HEADING_LEVELS].map((level) => ({
     label: `Заголовок ${level}`,
     isActive: () => current.isActive('heading', { level }),
     run: () => current.chain().focus().toggleHeading({ level }).run()
