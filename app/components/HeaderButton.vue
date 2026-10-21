@@ -21,8 +21,6 @@ const NuxtLink = resolveComponent('NuxtLink');
 </script>
 
 <style scoped lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .button {
   display: flex;
   align-items: center;

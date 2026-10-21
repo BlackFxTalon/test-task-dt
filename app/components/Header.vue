@@ -26,8 +26,6 @@ const route = useRoute();
 </script>
 
 <style scoped lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .header {
   position: sticky;
   top: 0;

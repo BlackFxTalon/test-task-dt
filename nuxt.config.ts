@@ -21,5 +21,17 @@ export default defineNuxtConfig({
   runtimeConfig: {
     alias: '',
     apiBase: 'https://naukatv.ru/api/test/materials'
+  },
+  vite: { 
+    css: 
+    { 
+      preprocessorOptions: 
+      { 
+        less: 
+        { 
+          additionalData: `@import "~/assets/styles/breakpoints.less";` 
+        } 
+      } 
+    } 
   }
 });

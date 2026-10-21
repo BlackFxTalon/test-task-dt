@@ -16,8 +16,6 @@ defineProps<{ material: IMaterial }>();
 </script>
 
 <style scoped lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .card {
   display: flex;
   flex-direction: column;

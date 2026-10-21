@@ -37,8 +37,6 @@ const select = (block: Block) => {
 </script>
 
 <style scoped lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .menu {
   position: relative;
 

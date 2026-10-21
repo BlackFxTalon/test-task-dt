@@ -23,8 +23,6 @@ try {
 </script>
 
 <style scoped lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .page {
   --container: var(--container-list);
 

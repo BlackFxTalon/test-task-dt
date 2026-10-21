@@ -60,8 +60,6 @@ const blocks = computed(() => {
 </script>
 
 <style lang="less">
-@import '../assets/styles/breakpoints.less';
-
 .editor {
   position: relative;
   padding-left: var(--editor-header-indent);
