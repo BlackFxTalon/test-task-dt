@@ -26,9 +26,7 @@ try {
 @import '../assets/styles/breakpoints.less';
 
 .page {
-  max-width: calc(var(--container-list) + 2 * var(--space-page));
-  margin: 0 auto;
-  padding: var(--space-page-top) var(--space-page);
+  --container: var(--container-list);
 
   &__title {
     margin-bottom: var(--space-page-gap);
