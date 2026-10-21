@@ -13,11 +13,11 @@ export const useMaterials = () => {
   };
 
   const create = async (draft: MaterialDraft) => {
-    const saved = await $fetch<Partial<IMaterial>>('/api/materials/save', {
+    const saved = await $fetch<IMaterial>('/api/materials/save', {
       method: 'POST',
       body: draft
     });
-    const material: IMaterial = { ...draft, ...saved } as IMaterial;
+    const material: IMaterial = { ...draft, ...saved };
     materials.value.push(material);
     return material;
   };
