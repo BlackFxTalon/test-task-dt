@@ -8,3 +8,9 @@ export interface IMaterial {
 }
 
 export type MaterialDraft = Omit<IMaterial, 'id'>;
+
+export interface ISaveResponse {
+  success: boolean
+  id: number
+  errors: string[]
+}

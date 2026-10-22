@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { registerEndpoint } from '@nuxt/test-utils/runtime';
+import { readBody } from 'h3';
 
 const material = (id: number, datetime: string): IMaterial => ({
   id,
@@ -18,8 +19,21 @@ registerEndpoint('/api/materials', () => [
 
 registerEndpoint('/api/materials/save', {
   method: 'POST',
-  handler: () => ({ id: 4 })
+  handler: async (event) => {
+    const { title } = await readBody(event);
+    return title === 'Ошибка'
+      ? { success: false, id: 0, errors: ['invalid'] }
+      : { success: true, id: 4, errors: [] };
+  }
 });
+
+const draft = {
+  title: 'Новый',
+  short_description: 'Описание',
+  datetime: '2026-05-01T10:00:00.000Z',
+  description_html: '<p>Текст</p>',
+  description_json: {}
+};
 
 describe('useMaterials', () => {
   beforeEach(() => {
@@ -41,19 +55,19 @@ describe('useMaterials', () => {
     expect(findById('100')).toBeUndefined();
   });
 
-  it('fills fields missing in save response from draft', async () => {
+  it('adds saved material with id from save response', async () => {
     const { materials, create } = useMaterials();
-    const draft = {
-      title: 'Новый',
-      short_description: 'Описание',
-      datetime: '2026-05-01T10:00:00.000Z',
-      description_html: '<p>Текст</p>',
-      description_json: {}
-    };
 
     const created = await create(draft);
 
     expect(created).toEqual({ ...draft, id: 4 });
     expect(materials.value[0]).toEqual(created);
+  });
+
+  it('throws and keeps list unchanged when save fails', async () => {
+    const { materials, create } = useMaterials();
+
+    await expect(create({ ...draft, title: 'Ошибка' })).rejects.toThrow();
+    expect(materials.value).toEqual([]);
   });
 });

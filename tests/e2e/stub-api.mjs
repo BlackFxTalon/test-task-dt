@@ -22,7 +22,7 @@ createServer(async (request, response) => {
   if (request.method === 'POST' && request.url.endsWith('/save')) {
     const material = { id: materials.length + 1, ...(await readBody(request)) };
     materials.push(material);
-    return send(response, 200, material);
+    return send(response, 200, { success: true, id: material.id, errors: [] });
   }
 
   send(response, 404, {});
