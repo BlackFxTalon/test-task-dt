@@ -37,10 +37,4 @@ try {
     gap: var(--space-grid);
   }
 }
-
-@media (max-width: @breakpoint-mobile) {
-  .page__grid {
-      justify-content: center;
-  }
-}
 </style>
