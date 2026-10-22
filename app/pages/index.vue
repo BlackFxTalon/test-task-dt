@@ -32,6 +32,7 @@ try {
 
   &__grid {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fill, var(--card-width));
     gap: var(--space-grid);
   }
