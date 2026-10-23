@@ -1,23 +1,21 @@
 <template>
-  <EditorContent :editor="editor" class="viewer" />
+  <!-- eslint-disable-next-line vue/no-v-html -- html is built from the editor schema, text is escaped -->
+  <div class="viewer" v-html="html" />
 </template>
 
 <script setup lang="ts">
-import { EditorContent, useEditor } from '@tiptap/vue-3';
+import type { JSONContent } from '@tiptap/vue-3';
+import { renderToHTMLString } from '@tiptap/static-renderer';
 
-const props = defineProps<{ content?: Record<string, unknown> }>();
+const props = defineProps<{ content?: JSONContent }>();
 
-const editor = useEditor({
-  content: props.content,
-  extensions: editorExtensions,
-  editable: false
-});
+const html = computed(() =>
+  props.content ? renderToHTMLString({ extensions: editorExtensions, content: props.content }) : ''
+);
 </script>
 
 <style lang="less">
-.viewer .ProseMirror {
-  outline: none;
-
+.viewer {
   > * + * {
     margin-top: 1.4em;
   }

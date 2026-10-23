@@ -41,6 +41,9 @@ test('creates material and opens its page', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Совы и их голова' })).toBeVisible();
   await expect(page.getByText('Короткое описание')).toBeVisible();
   await expect(page.getByText('Основной текст материала')).toBeVisible();
+
+  const html = await (await page.request.get(page.url())).text();
+  expect(html).toContain('Основной текст материала');
 });
 
 test('lists created material and links to its page', async ({ page }) => {
