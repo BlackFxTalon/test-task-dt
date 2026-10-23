@@ -66,7 +66,7 @@ defineProps<{ material: IMaterial }>();
   }
 }
 
-@media (min-width: (@breakpoint-mobile + 1px)) {
+@media (hover: hover) {
   .card:hover {
     filter: var(--shadow-card-hover);
   }
